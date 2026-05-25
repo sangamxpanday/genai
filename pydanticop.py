@@ -34,3 +34,5 @@ template = PromptTemplate(
 chain = template | llm | parser
 result = chain.invoke({"topic": "Artificial General Intelligence"})
 print(result)
+
+chain.get_graph().print_ascii()

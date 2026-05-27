@@ -1,7 +1,7 @@
 from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnableParallel, RunnableSequence
+from langchain_core.runnables import RunnableParallel, RunnableSequence, RunnablePassthrough
 import os
 
 api_token = os.getenv("HUGGINGFACE_API_KEY")

@@ -1,96 +1,158 @@
-# RAG
-## Component of RAG:
+# RAG (Retrieval-Augmented Generation)
+
+## Components of RAG
 1. Document Loader
 2. Text Splitter
 3. Vector Store
-4. Retrievers
+4. Retriever
 
-## What is RAG
-* Query(Prompt) -> LLM -> Response
-* LLM are giant Transformer based Neural Network  Architecture
- 
-* Where does llm store all knowledge? ->Parameter's
-In form of numbers. 
-* Knowledge are called parametric knowledge.
+---
 
-* How to access these knowledge? ->Prompting
-We send prompt to LLM.
-* It searches through it's parametric knowledge and returns answer/knowledge.
+## What is RAG?
 
-* We cannot generate best knowledge based on only it's parametric knowledge
-- eg:Personal information. (What is my teacher's name?)
-* ALso known as Hallucination(Giving factual answer know on confidence)
+### Traditional LLM Workflow
 
-* Problem:
-- Personal information
-- Recent data
-- Hallucination
+`Query (Prompt) → LLM → Response`
 
-### Fine Tuning
-* How can we solve this problem?
-- Fine tuning.
-- Train a pretrain model on smaller domain specific dataset
+- LLMs are giant transformer-based neural network architectures.
+- LLMs store knowledge in their **parameters**.
+- This stored knowledge is called **Parametric Knowledge**.
 
-* Different ways of fine tuning
-1. Supervised fine tuning(labelled)
-2. Continue pre tranning(Unsupervised)
-3. RLHF
-4. LORA
+### How does an LLM access its knowledge?
+- Through **prompting**.
+- We send a prompt to the LLM.
+- The model searches through its parametric knowledge and generates a response.
 
-* Problem with fine tuning
-- Traning big model is Computationally expensive
-- Technical Expertise
-- Changing data 
+### Limitations of Parametric Knowledge
+LLMs cannot always provide the best answer using only their stored knowledge.
 
-* So we dont use fine tuning
+**Examples:**
+- Personal information (e.g., "What is my teacher's name?")
+- Recent or real-time information
 
-### In Context Learning 
-* Another technique for solving these problems are:
-In context learning
-- LLM solve a task by looking at examples.
-- **Few short prompting**
-- Small model didn't have in context learning
-- Larger's model are capable
-- Research Paper: **Language Models are Few-Shot Learners**
+This can lead to **hallucinations**, where the model generates incorrect or fabricated information with high confidence.
 
-### RAG
-- What if instead of few shot prompting we sent the entire context
-- This is called RAG
-- (Query + Context) -> (Prompt) -> (LLM) -> (Response)
+### Problems
+- Personal information is unavailable.
+- Recent data may not be included.
+- Hallucinations can occur.
 
-## Understanding RAG
+---
 
-- Information Retrieval + Text Generation
+## Fine-Tuning
 
-### **Steps of RAG**:
-- Indexing
-- Retrieval
-- Augmentation 
-- Generation
+### How can we solve these problems?
+One approach is **Fine-Tuning**.
 
-### Indexing
-- Context from external knowledge base
-- Creating external knowlege base
-* ***Steps:***
-1. Document Ingestion(Document Loader)
+Fine-tuning means training a pre-trained model on a smaller, domain-specific dataset.
+
+### Types of Fine-Tuning
+1. Supervised Fine-Tuning (SFT)
+2. Continued Pretraining
+3. RLHF (Reinforcement Learning from Human Feedback)
+4. LoRA (Low-Rank Adaptation)
+
+### Problems with Fine-Tuning
+- Training large models is computationally expensive.
+- Requires technical expertise.
+- Difficult to keep up with frequently changing data.
+
+Because of these limitations, fine-tuning is not always the preferred solution.
+
+---
+
+## In-Context Learning
+
+Another technique for solving these problems is **In-Context Learning**.
+
+### What is In-Context Learning?
+- The LLM learns how to solve a task by looking at examples provided in the prompt.
+- This is commonly known as **Few-Shot Prompting**.
+- Smaller models usually have limited in-context learning capabilities.
+- Larger models perform much better at it.
+
+### Research Paper
+**Language Models are Few-Shot Learners**
+
+---
+
+## RAG (Retrieval-Augmented Generation)
+
+### Core Idea
+Instead of sending only a few examples, we provide the model with relevant external context.
+
+`(Query + Context) → Prompt → LLM → Response`
+
+RAG combines:
+- **Information Retrieval**
+- **Text Generation**
+
+---
+
+# Understanding RAG
+
+## Main Stages of RAG
+1. Indexing
+2. Retrieval
+3. Augmentation
+4. Generation
+
+---
+
+## 1. Indexing
+
+The goal is to create an external knowledge base from your documents.
+
+### Steps
+1. Document Ingestion (Document Loader)
 2. Text Chunking (Text Splitter)
 3. Embedding Generation
-4. Store in vector store
+4. Store Embeddings in a Vector Store
 
-- Vector store = External knowledge base
+### Note
+A **Vector Store** acts as the external knowledge base.
 
-### Retrieval
-- Similar to query from external knowledge base
-- finding the most relevent data
-- Generates embedding vector of our query
-- Searches from the similar vector to our query from vector store and gives each vector rank
-- context = vector with highest rank 
+---
 
-### Augmentation
-- Prompt creation from our query and retrieved text
-- Relevent Chunks = Context
+## 2. Retrieval
+
+The goal is to find the most relevant information from the vector store.
+
+### Process
+1. Convert the user's query into an embedding vector.
+2. Compare it with vectors stored in the vector database.
+3. Rank the stored vectors based on similarity.
+4. Retrieve the most relevant chunks as context.
+
+`Query → Embedding → Similarity Search → Relevant Chunks`
+
+The retrieved chunks become the **Context**.
+
+---
+
+## 3. Augmentation
+
+The retrieved context is combined with the user's query to create a better prompt.
+
+### Components
+- User Query
+- Retrieved Chunks (Context)
 - Prompt Template
 
-### Generation
-- Text generated from LLM's
-- Gives prompt to LLM
+### Output
+
+`Prompt = Query + Retrieved Context`
+
+---
+
+## 4. Generation
+
+The final prompt is sent to the LLM.
+
+### Process
+
+`Prompt → LLM → Response`
+
+The LLM generates a response using both:
+- Its Parametric Knowledge
+- The Retrieved Context

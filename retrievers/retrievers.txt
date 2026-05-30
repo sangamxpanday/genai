@@ -22,3 +22,12 @@ Vector Store retrievers
     turns user query to vectore
     compares query with stored vectores
     retrieves to k 
+
+Maximal marginal relevence
+    more diverse perspectives,
+    different types of similar documnets
+    if our db has same kind of data's
+    then we pick only one of them
+    pick relevent doc first
+    pick second relevent that is disimilar to first one
+    

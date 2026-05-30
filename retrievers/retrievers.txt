@@ -1,0 +1,24 @@
+###Types of retrievers
+-Based on Data sources
+    wikipedia retrievers
+    vector store
+    archive retrievers
+
+-Based on search strategies
+    mmr(maximum marginal relevence)
+    multi query retrievers
+    contexual compression retrievers
+
+wikipedia retrievers
+    queries wikipedia api to fetch relevent content for a given query
+    send's our query to wiki api
+    retrives the most relevent Data
+    returns them at lanchain document object
+
+Vector Store retrievers
+    most common type of retrievers
+    fetch doc from vector store
+    Based on semantic similarity using vectore embeddings
+    turns user query to vectore
+    compares query with stored vectores
+    retrieves to k 

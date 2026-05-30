@@ -30,4 +30,18 @@ Maximal marginal relevence
     then we pick only one of them
     pick relevent doc first
     pick second relevent that is disimilar to first one
-    
+
+Multi Query Retriever
+    vayena
+
+contexual compression retrievers
+    advanced retriever that improves by compressing doc after retrieval
+    normally, whole doc is retrieved but we need one sentence. 
+    eg:
+    retrieved doc = sangam is don. luffy is gonna be king of pirates. Lionel messi is goat of football
+    query = who is monkey d. luffy
+    then we get the whole doc but we need only second sentence. 
+    we use normal retriever at first then send the retrieved doc to llm for compression/ trimming
+    so in above example we get: luffy is gonna be king of pirates
+    use when doc are large and has mixed information 
+multi query and contexual compression ko kina milena paxi hernu

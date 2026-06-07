@@ -156,3 +156,10 @@ The final prompt is sent to the LLM.
 The LLM generates a response using both:
 - Its Parametric Knowledge
 - The Retrieved Context
+
+
+- Multi Modal RAG sytem
+- Context Window Optimization
+- Answer with citation
+- Agentic RAG
+- Memory Based
